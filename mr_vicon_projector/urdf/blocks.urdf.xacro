@@ -1,0 +1,28 @@
+<robot name="vicon_block" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <link name="block_link">
+    <visual>
+      <geometry>
+        <box size="0.127 0.127 0.0762"/>
+      </geometry>
+      <material name="custom_red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.28 0.28 0.17"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </link>
+  <!-- This sets color in Gazebo -->
+  <gazebo reference="block_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+</robot>

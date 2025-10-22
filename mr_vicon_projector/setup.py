@@ -1,0 +1,24 @@
+from setuptools import setup
+setup(
+  name='mr_vicon_projector',
+  version='1.0.0',
+  packages=['mr_vicon_projector'],
+  data_files=[
+    ('share/ament_index/resource_index/packages',['resource/mr_vicon_projector']),
+    ('share/mr_vicon_projector',['package.xml']),
+    ('share/mr_vicon_projector/launch',['launch/my_robot_gazebo.launch.xml']),
+    ('share/mr_vicon_projector/worlds',['worlds/obstacles.world']),
+    ('share/mr_vicon_projector/urdf',[
+      'urdf/mobile_base.xacro','urdf/blocks.urdf.xacro','urdf/common_properties.xacro','urdf/mobile_base_gazebo.xacro','urdf/my_robot.urdf.xacro'
+    ]),
+    ('share/mr_vicon_projector/data',['data/obstacles.json']),
+    ('share/mr_vicon_projector/config',['config/calibration.yaml']),
+  ],
+  entry_points={'console_scripts':[
+    'mr_rrt_auto_cal=mr_vicon_projector.rrt_planner_with_auto_calibration:main',
+    'mr_rrtstar_auto_cal=mr_vicon_projector.rrt_star_with_auto_calibration:main',
+    'mr_dynamic_replan=mr_vicon_projector.rrt_dynamic_replan:main',
+    'mr_tb3_random_walker=mr_vicon_projector.tb3_random_walker:main',
+    'mr_vicon_to_gazebo=mr_vicon_projector.vicon_to_gazebo_pose:main',
+  ]}
+)

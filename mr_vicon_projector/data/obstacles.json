@@ -1,0 +1,40 @@
+	
+  [
+  {
+    "name": "unit_sphere",
+    "pose": {"x": -2.1646, "y": -1.59946, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+    "type": "sphere",
+    "radius": 0.5
+  },
+  {
+    "name": "unit_cylinder",
+    "pose": {"x": -1.83261, "y": 1.382888, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+    "type": "cylinder",
+    "radius": 0.5,
+    "length": 1.0
+  },
+  {
+    "name": "unit_box",
+    "pose": {"x": 1.01344, "y": -2.17853, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+    "type": "box",
+    "size": [1.0, 1.0, 1.0]
+  },
+  {
+    "name": "unit_sphere_0",
+    "pose": {"x": 2.29967, "y": 2.6355, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+    "type": "sphere",
+    "radius": 0.5
+  },
+    {
+  "name": "unit_box_side",
+  "type": "box",
+  "pose": {"x": 0.0, "y": 5.0, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+  "size": [2.0, 1.0, 1.0]
+},
+{
+  "name": "unit_box_side02",
+  "type": "box",
+  "pose": {"x": 3.0, "y": -5.5, "z": 0.5, "roll": 0.0, "pitch": 0.0, "yaw": 0.0},
+  "size": [1.0, 1.0, 1.0]
+}
+]

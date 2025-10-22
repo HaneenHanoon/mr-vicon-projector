@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <!-- Dimensions from Create 3 -->
+  <xacro:property name="base_radius" value="0.35" />
+  <xacro:property name="base_height" value="0.1429" />
+  <xacro:property name="wheel_radius" value="0.05" />
+  <xacro:property name="wheel_length" value="0.05" />
+
+  <!-- <link name="base_footprint" /> -->
+
+  <!-- Cylindrical Body -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${base_radius}" length="${base_height}" />
+      </geometry>
+      <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
+      <material name="grey" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${base_radius}" length="${base_height}" />
+      </geometry>
+      <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
+    </collision>
+    <xacro:cylinder_inertia m="4.0" r="${2*base_radius}" h="${2*base_height}" 
+                            xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
+  </link>
+  
+
+
+</robot>

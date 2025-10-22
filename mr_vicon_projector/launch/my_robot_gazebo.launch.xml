@@ -1,0 +1,82 @@
+<launch>
+ 
+  <let name="urdf_path"
+       value="$(find-pkg-share my_robot_description)/urdf/my_robot.urdf.xacro"/>
+  <let name="rviz_config_path"
+       value="$(find-pkg-share my_robot_bringup)/rviz/urdf_config.rviz"/>
+
+  <node pkg="robot_state_publisher" exec="robot_state_publisher">
+    <param name="robot_description"
+           value="$(command 'xacro $(var urdf_path)')" />
+  </node>
+
+  <!-- Correct unified Gazebo ROS2 launch -->
+  <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py">
+    <!-- <arg name="world" value="$(find-pkg-share my_robot_bringup)/worlds/test_world.world"/> -->
+    <arg name="world" value="$(find-pkg-share my_robot_bringup)/worlds/obstacles.world"/>
+    
+  
+    <arg name="verbose" value="true"/>
+  </include>
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py"
+        args="-topic robot_description -entity my_robot"/>
+  
+  <!-- <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen"
+      args="-entity gazebo_block_lb -file $(find-pkg-share my_robot_description)/urdf/blocks.urdf.xacro -x 0 -y 0 -z 0.0381"/>
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen"
+      args="-entity gazebo_block_lt -file $(find-pkg-share my_robot_description)/urdf/blocks.urdf.xacro -x 1 -y 0 -z 0.0381"/>
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen"
+      args="-entity gazebo_block_rb -file $(find-pkg-share my_robot_description)/urdf/blocks.urdf.xacro -x 0 -y 1 -z 0.0381"/>
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen"
+      args="-entity gazebo_block_rt -file $(find-pkg-share my_robot_description)/urdf/blocks.urdf.xacro -x 1 -y 1 -z 0.0381"/> -->
+
+
+
+  <!-- <node pkg="rviz2" exec="rviz2" output="screen"
+        args="-d $(var rviz_config_path)" /> -->
+ <!-- Spawn a TurtleBot3 (SDF) as a dynamic obstacle, in namespace /tb3_0 -->
+<node pkg="gazebo_ros" exec="spawn_entity.py" output="screen" namespace="tb3_0"
+      args="-entity tb3_0 -file $(find-pkg-share turtlebot3_gazebo)/models/turtlebot3_waffle/model.sdf -x -1.0 -y 0.5 -z 0.01 -Y 1.57 -robot_namespace tb3_0"/>
+
+
+<!-- Spawn TB3s + start their random-walkers -->
+
+  
+
+
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen" namespace="tb3_1"
+        args="-entity tb3_1 -file $(find-pkg-share turtlebot3_gazebo)/models/turtlebot3_waffle/model.sdf -x  1.2 -y -1.0 -z 0.01 -Y 0.00 -robot_namespace tb3_1"/>
+  
+
+
+  <node pkg="gazebo_ros" exec="spawn_entity.py" output="screen" namespace="tb3_2"
+        args="-entity tb3_2 -file $(find-pkg-share turtlebot3_gazebo)/models/turtlebot3_waffle/model.sdf -x -0.5 -y -2.0 -z 0.01 -Y -1.57 -robot_namespace tb3_2"/>
+  
+
+
+<!-- OPTIONAL: keyboard teleop (better in its own terminal; works here too)
+<node pkg="teleop_twist_keyboard" exec="teleop_twist_keyboard" output="screen">
+  <remap from="/cmd_vel" to="/tb3_0/cmd_vel"/>
+</node> -->
+ <group>
+    <push-ros-namespace namespace="tb3_0"/>
+    <node pkg="rrt_planner" exec="tb3_random_walker" output="screen"/>
+  </group>
+<group>
+    <push-ros-namespace namespace="tb3_1"/>
+    <node pkg="rrt_planner" exec="tb3_random_walker" output="screen"/>
+  </group>
+    
+<group>
+    <push-ros-namespace namespace="tb3_2"/>
+    <node pkg="rrt_planner" exec="tb3_random_walker" output="screen"/>
+  </group>
+
+</launch>
+
+
